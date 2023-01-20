@@ -1,0 +1,146 @@
+:root {
+  --nebulon-color: rgb(87, 203, 164);
+  --codex-color: cadetblue;
+  --background-color: rgb(30, 32, 38);
+}
+
+.wrapper {
+  width: 100%;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  margin-top: 80px;
+  height: 80%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.messageBox {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageControl {
+  height: max-content;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageChoice {
+  display: flex;
+  gap: 10px;
+  height: max-content;
+  margin: 0;
+}
+
+.welcomeMsg {
+  font-size: 20px;
+  margin-right: 20px;
+  color: var(--color-main);
+}
+
+.nebulon {
+  width: max-content;
+  height: max-content;
+  background-color: var(--nebulon-color);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.codex {
+  height: max-content;
+  width: max-content;
+  background-color: cadetblue;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.messageScreen {
+  padding: 20px;
+  background: transparent;
+  margin-bottom: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 550px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: #fff3;
+  -webkit-border-radius: 1ex;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--nebulon-color);
+  -webkit-border-radius: 1ex;
+}
+
+.codexTurn {
+  border-top: 2px solid var(--codex-color);
+}
+.nebulonTurn {
+  border-top: 2px solid var(--nebulon-color);
+}
+
+.form {
+  height: 50px;
+  width: 100%;
+  border: none;
+  display: flex;
+  gap: 10px;
+}
+
+.nebulonSelected {
+  box-shadow: 0 0 5px 2px var(--nebulon-color);
+}
+.codexSelected {
+  box-shadow: 0 0 5px 2px var(--codex-color);
+}
+
+.notSelected {
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+.notSelected:hover {
+  opacity: 0.6;
+}
+
+.form input {
+  flex-grow: 1;
+  background: transparent;
+  border: 2px solid var(--color-main);
+  border-radius: 5px;
+  outline: none;
+  font-size: 20px;
+  padding-left: 10px;
+  color: var(--color-main);
+}
+.btn {
+  width: 50px;
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid var(--color-main);
+  color: rgb(181, 178, 178);
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(0.99);
+}
+
+.form input::placeholder {
+  color: #333;
+  font-size: 17px;
+}

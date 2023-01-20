@@ -1,0 +1,36 @@
+.message {
+  background: linear-gradient(var(--background-color), rgb(41, 43, 51));
+  width: 400px;
+  height: max-content;
+  padding: 15px;
+}
+
+.date {
+  font-size: 13px;
+  margin: 0;
+  color: #b0b0b0;
+}
+.sender {
+  font-size: 13px;
+  margin: 0;
+  color: rgb(171, 162, 162);
+}
+
+.mainBody {
+  margin: 5px 0;
+  color: rgb(219, 211, 211);
+  font-size: 20px;
+}
+
+.sentByMe {
+  align-self: flex-end;
+  border: 1px solid var(--nebulon-color);
+}
+
+.sentByNotMe {
+  border: 1px solid var(--codex-color);
+}
+
+.message:first-child {
+  margin-top: auto;
+}

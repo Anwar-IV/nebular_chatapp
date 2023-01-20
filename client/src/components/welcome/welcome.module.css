@@ -1,0 +1,52 @@
+.wrapper {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.card {
+  width: 600px;
+  background: transparent;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: silver;
+  padding: 10px;
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+}
+
+.options > p {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+.options > p > a {
+  display: block;
+  text-decoration: none;
+  color: aquamarine;
+  transition: text-shadow 0.5s;
+}
+
+.options > p > a:hover {
+  text-shadow: 0 0 13px rgb(0, 255, 220);
+}
+
+.welcomeTitle {
+  padding: 0;
+  margin-left: 100px;
+  font-size: 40px;
+}
+
+.supplementaryTitle {
+  margin: 10;
+  text-align: center;
+}
