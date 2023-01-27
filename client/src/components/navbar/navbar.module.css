@@ -1,9 +1,35 @@
 .navbarWrapper {
   display: flex;
+  justify-content: space-between;
   width: 100vw;
   height: 65px;
   position: fixed;
   top: 0;
+}
+
+.signout {
+  height: 35px;
+  width: 75px;
+  background: transparent;
+  box-shadow: 0 0 5px 1px red;
+  color: red;
+  font-size: 14px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 50px;
+  margin-top: 20px;
+  transition: 0.2s;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.signout:hover {
+  box-shadow: 0 0 5px 2px red;
+  opacity: 1;
+}
+
+.signout:active {
+  transform: scale(0.96);
 }
 
 .logoWrapper {

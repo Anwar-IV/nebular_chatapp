@@ -7,12 +7,20 @@ import { useMessageCtx } from "../../context/MessageContext";
 import { Nebulon } from "../nebulon/Nebulon";
 import { Codex } from "../codex/Codex";
 
+export type CodexMessageType = {
+  sender?: "me" | "codex";
+  msg: string;
+};
+
 export function Dashboard() {
   const navigate = useNavigate();
   const { socket, sendMessage } = useMessageCtx();
   const { getUser, user } = useAuthContext();
   const [message, setMessage] = useState<string>("");
   const [isNebulon, setIsNebulon] = useState<boolean>(true);
+  const [codexMessages, setCodexMessages] = useState<CodexMessageType[]>([]);
+  const [codexThinking, setCodexThinking] = useState<boolean>(false);
+
   useEffect(() => {
     getUser();
   }, []);
@@ -23,13 +31,32 @@ export function Dashboard() {
     }
   }, [user]);
 
-  const messageHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const messageHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isNebulon) {
+      setMessage("");
       sendMessage(user?._id!, "Nebulon", message);
     } else {
-      sendMessage(user?._id!, "Codex Corner", message);
+      try {
+        setCodexMessages((prev) => [...prev, { sender: "me", msg: message }]);
+        setMessage("");
+        setCodexThinking(true);
+        setCodexMessages((prev) => [...prev, { msg: "load" }]);
+        const payload = JSON.stringify({ prompt: message });
+        const response = await fetch("http://localhost:5500/codex", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: payload,
+        });
+        const data = await response.json();
+        setCodexThinking(false);
+        setCodexMessages((prev) => prev.filter((msg) => msg.msg !== "load"));
+        setCodexMessages((prev) => [...prev, { msg: data, sender: "codex" }]);
+      } catch (error) {
+        console.log(error);
+        setCodexThinking(false);
+      }
     }
   };
 
@@ -63,7 +90,11 @@ export function Dashboard() {
               isNebulon ? styles.nebulonTurn : styles.codexTurn
             }`}
           >
-            {isNebulon ? <Nebulon /> : <Codex />}
+            {isNebulon ? (
+              <Nebulon />
+            ) : (
+              <Codex messages={codexMessages} codexThinking={codexThinking} />
+            )}
           </div>
         </div>
         <form className={styles.form} onSubmit={messageHandler}>

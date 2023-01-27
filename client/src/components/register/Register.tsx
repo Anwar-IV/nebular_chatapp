@@ -2,7 +2,7 @@ import styles from "./register.module.css";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Register() {
   const { registerUser, registerError, setRegisterError, user } =
@@ -64,6 +64,14 @@ export function Register() {
     <div className={styles.wrapper}>
       {registerError && <div className={styles.error}>{handleError()}</div>}
       <form className={styles.form} onSubmit={handleRegister}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className={styles.loginBtn}
+        >
+          <Link to={"/login"}>Login instead</Link>
+        </motion.div>
         <motion.div
           initial={{ x: -1500, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

@@ -2,11 +2,11 @@ import styles from "./login.module.css";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export function Login() {
   const { loginUser, user, loginError, setLoginError } = useAuthContext();
-
+  const location = useLocation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -21,7 +21,6 @@ export function Login() {
     console.log("It got here :0");
     loginUser(username, password);
   };
-
   const handleError = () => {
     if (loginError && loginError.status < 504) {
       return loginError.message;
@@ -48,6 +47,14 @@ export function Login() {
     <div className={styles.wrapper}>
       {loginError && <div className={styles.error}>{handleError()}</div>}
       <form className={styles.form} onSubmit={handleLogin}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className={styles.registerBtn}
+        >
+          <Link to={"/register"}>Register instead</Link>
+        </motion.div>
         <motion.div
           initial={{ x: -1500, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

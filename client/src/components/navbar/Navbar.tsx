@@ -1,10 +1,30 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Welcome } from "../welcome/Welcome";
 import styles from "./navbar.module.css";
+import { useAuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 export function Navbar() {
   const location = useLocation();
-  console.log({ location });
+  const { user, setUser } = useAuthContext();
+  const navigate = useNavigate();
+  const signoutHandler = async () => {
+    try {
+      const response = await fetch("http://localhost:5500/logout", {
+        credentials: "include",
+      });
+      setUser(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
+
   return (
     <>
       <div className={styles.navbarWrapper}>
@@ -14,6 +34,11 @@ export function Navbar() {
           </Link>
           <img src="/planet.svg" alt="" className={styles.img} />
         </div>
+        {user && (
+          <button className={styles.signout} onClick={signoutHandler}>
+            Sign Out
+          </button>
+        )}
       </div>
       {location.pathname === "/" ? <Welcome /> : <Outlet />}
     </>

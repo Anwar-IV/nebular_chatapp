@@ -100,3 +100,10 @@ export const login = async (req: any, res: Response) => {
     throw error;
   }
 };
+
+export const signout = (req: any, res: Response) => {
+  console.log(req.cookies);
+  res.cookie("access", "");
+  res.cookie("refresh", "");
+  res.sendStatus(200);
+};

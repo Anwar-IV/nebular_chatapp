@@ -26,4 +26,5 @@ export type AuthContextType = {
   registerError: ErrorType | null;
   setRegisterError: React.Dispatch<React.SetStateAction<ErrorType | null>>;
   getUser: () => void;
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 };

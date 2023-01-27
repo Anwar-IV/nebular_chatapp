@@ -121,6 +121,7 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
         registerError,
         setRegisterError,
         getUser,
+        setUser,
       }}
     >
       {children}
