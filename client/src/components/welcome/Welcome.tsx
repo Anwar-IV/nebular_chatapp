@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./welcome.module.css";
-import { anticipate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const welcomeTitle = `Welcome to Nebular`;
 

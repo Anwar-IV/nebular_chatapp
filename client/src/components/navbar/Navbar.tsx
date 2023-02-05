@@ -21,7 +21,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     }
   }, [user]);
 
