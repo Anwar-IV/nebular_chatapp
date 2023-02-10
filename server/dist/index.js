@@ -18,6 +18,7 @@ import { Server } from "socket.io";
 import { messageModel } from "./schema/messageSchema.js";
 import { Configuration, OpenAIApi } from "openai";
 env.config();
+const PORT = process.env.PORT || 5500;
 //Socket io initialization
 const app = express();
 const server = http.createServer(app);
@@ -138,4 +139,4 @@ app.post("/codex", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
 }));
-server.listen(5500, () => console.log("server started on port 5500"));
+server.listen(PORT, () => console.log(`server started on port ${PORT}`));

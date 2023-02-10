@@ -145,4 +145,4 @@ app.post("/codex", async (req, res) => {
     }
   }
 });
-server.listen(PORT, () => console.log("server started on port 5500"));
+server.listen(PORT, () => console.log(`server started on port ${PORT}`));
