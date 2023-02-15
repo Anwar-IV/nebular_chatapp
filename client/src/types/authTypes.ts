@@ -11,6 +11,8 @@ export type UserType = {
   username: string;
   createdAt: Date;
   updatedAt: Date;
+  access: string;
+  refresh: string;
 };
 
 export type AuthContextProviderType = {
@@ -25,6 +27,5 @@ export type AuthContextType = {
   registerUser: (username: string, password: string) => void;
   registerError: ErrorType | null;
   setRegisterError: React.Dispatch<React.SetStateAction<ErrorType | null>>;
-  getUser: () => void;
   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 };

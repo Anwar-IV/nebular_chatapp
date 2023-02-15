@@ -20,7 +20,7 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
   async function loginUser(username: string, password: string) {
     try {
       const payload = JSON.stringify({ username, password });
-      const response = await fetch("http://localhost:5500/login", {
+      const response = await fetch("https://nebular-api.herokuapp.com/login", {
         method: "POST",
         headers: { "content-type": "application/json" },
         credentials: "include",
@@ -46,12 +46,15 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
   async function registerUser(username: string, password: string) {
     try {
       const payload = JSON.stringify({ username, password });
-      const response = await fetch("http://localhost:5500/register", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-        body: payload,
-      });
+      const response = await fetch(
+        "https://nebular-api.herokuapp.com/register",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          credentials: "include",
+          body: payload,
+        }
+      );
       console.log({ response });
       if (response.status === 201) {
         const user: UserType = await response.json();
@@ -69,46 +72,51 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
       setRegisterError({ status: 504, error });
     }
   }
+  // getUser function only useful if im using cookies but netlify and heroku didn't
+  // allow me to set them so i got rid of it and sent jwt tokens across fetch requests
 
-  async function getUser() {
-    try {
-      const response = await fetch("http://localhost:5500/getuser", {
-        credentials: "include",
-      });
+  // async function getUser() {
+  //   try {
+  //     const response = await fetch(
+  //       "https://nebular-api.herokuapp.com/getuser",
+  //       {
+  //         credentials: "include",
+  //       }
+  //     );
 
-      if (response.status === 200) {
-        const data: UserType = await response.json();
-        setUser(data);
-      } else if (response.status >= 400 && response.status < 500) {
-        //User not authorised error
-        setUser(null);
-        setLoginError({
-          status: 403,
-          message: "Unauthorised access. Please login to proceed",
-        });
-      } else {
-        setUser(null);
-        setLoginError({
-          status: 500,
-          message: "Sorry, an unexpected error has occured",
-        });
-      }
-    } catch (error: any) {
-      if (error.message) {
-        console.error(error.message);
-        setUser(null);
-        setLoginError({ status: 500, message: error.message });
-        return;
-      }
-      console.error({ error });
-      setUser(null);
-      setLoginError({
-        status: 504,
-        message: "Sorry, an unexpected error has occured",
-      });
-      return;
-    }
-  }
+  //     if (response.status === 200) {
+  //       const data: UserType = await response.json();
+  //       setUser(data);
+  //     } else if (response.status >= 400 && response.status < 500) {
+  //       //User not authorised error
+  //       setUser(null);
+  //       setLoginError({
+  //         status: 403,
+  //         message: "Unauthorised access. Please login to proceed",
+  //       });
+  //     } else {
+  //       setUser(null);
+  //       setLoginError({
+  //         status: 500,
+  //         message: "Sorry, an unexpected error has occured",
+  //       });
+  //     }
+  //   } catch (error: any) {
+  //     if (error.message) {
+  //       console.error(error.message);
+  //       setUser(null);
+  //       setLoginError({ status: 500, message: error.message });
+  //       return;
+  //     }
+  //     console.error({ error });
+  //     setUser(null);
+  //     setLoginError({
+  //       status: 504,
+  //       message: "Sorry, an unexpected error has occured",
+  //     });
+  //     return;
+  //   }
+  // }
 
   return (
     <AuthContext.Provider
@@ -120,7 +128,6 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
         registerUser,
         registerError,
         setRegisterError,
-        getUser,
         setUser,
       }}
     >

@@ -8,6 +8,6 @@ router.post("/register", register);
 
 router.post("/login", login);
 
-router.get("/getuser", authcontrol);
+// router.get("/getuser", authcontrol);
 
 router.get("/logout", signout);

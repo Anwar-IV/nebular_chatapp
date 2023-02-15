@@ -15,15 +15,11 @@ export type CodexMessageType = {
 export function Dashboard() {
   const navigate = useNavigate();
   const { socket, sendMessage } = useMessageCtx();
-  const { getUser, user } = useAuthContext();
+  const { user } = useAuthContext();
   const [message, setMessage] = useState<string>("");
   const [isNebulon, setIsNebulon] = useState<boolean>(true);
   const [codexMessages, setCodexMessages] = useState<CodexMessageType[]>([]);
   const [codexThinking, setCodexThinking] = useState<boolean>(false);
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   useEffect(() => {
     if (!user) {
@@ -44,11 +40,14 @@ export function Dashboard() {
         setCodexThinking(true);
         setCodexMessages((prev) => [...prev, { msg: "load" }]);
         const payload = JSON.stringify({ prompt: message });
-        const response = await fetch("http://localhost:5500/codex", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: payload,
-        });
+        const response = await fetch(
+          "https://nebular-api.herokuapp.com/codex",
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: payload,
+          }
+        );
         const data = await response.json();
         setCodexThinking(false);
         setCodexMessages((prev) => prev.filter((msg) => msg.msg !== "load"));

@@ -44,6 +44,8 @@ export const register = async (req: any, res: Response) => {
       username: new_user.username,
       createdAt: new_user.createdAt,
       updatedAt: new_user.updatedAt,
+      access: access_token,
+      refresh: refresh_token,
     });
   } catch (error) {
     throw error;
@@ -94,6 +96,8 @@ export const login = async (req: any, res: Response) => {
       username: isUser.username,
       createdAt: isUser.createdAt,
       updatedAt: isUser.updatedAt,
+      access: access_token,
+      refresh: refresh_token,
     });
   } catch (error) {
     console.log("Line number 51 --  userController");
