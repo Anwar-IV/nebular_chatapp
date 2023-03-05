@@ -23,7 +23,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://relaxed-daffodil-a6d106.netlify.app",
+    origin: "http://localhost:5173",
   },
 });
 
@@ -39,7 +39,7 @@ const io = new Server(server, {
 
 app.use(
   cors({
-    origin: "https://relaxed-daffodil-a6d106.netlify.app",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -62,10 +62,10 @@ io.on("connection", (socket) => {
         .populate("userId", "username");
 
       const nebulonPayload = allMessages.map((message: any) => ({
-        id: message._id,
-        username: message.userId.username,
-        message: message.message,
-        sentAt: message.createdAt,
+        id: message?._id,
+        username: message?.userId.username,
+        message: message?.message,
+        sentAt: message?.createdAt,
       }));
 
       io.emit("nebulon-payload", nebulonPayload);
@@ -77,6 +77,7 @@ io.on("connection", (socket) => {
   socket.on("send-message", async (data: MessageType) => {
     try {
       const { id, room, message } = data;
+      console.log(data);
       await messageModel.create({
         userId: id,
         room,
@@ -88,15 +89,14 @@ io.on("connection", (socket) => {
         })
         .sort({ createdAt: 1 })
         .populate("userId", "username");
-
       const nebulonPayload = allMessages.map((message: any) => ({
         id: message._id,
-        username: message.userId.username,
+        username: message?.userId?.username,
         message: message.message,
         sentAt: message.createdAt,
       }));
 
-      console.log(nebulonPayload);
+      console.log({ nebulonPayload });
       io.emit("nebulon-payload", nebulonPayload);
     } catch (error: any) {
       if (error.message) {

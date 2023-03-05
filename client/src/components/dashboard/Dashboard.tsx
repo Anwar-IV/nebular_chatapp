@@ -41,7 +41,8 @@ export function Dashboard() {
         setCodexMessages((prev) => [...prev, { msg: "load" }]);
         const payload = JSON.stringify({ prompt: message });
         const response = await fetch(
-          "https://nebular-api.herokuapp.com/codex",
+          "http://localhost:5500/codex",
+          // "https://nebular-api.herokuapp.com/codex",
           {
             method: "POST",
             headers: { "content-type": "application/json" },
