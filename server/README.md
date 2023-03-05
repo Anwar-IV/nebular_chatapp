@@ -1,4 +1,4 @@
-You need to follow these 3 steps to get this server up and running.
+You need to follow these 4 steps to get this server up and running.
 
 1- Replace the environment variables in the .env.example file with the required values, for example for the MONGO_URI env variable you need a valid MongoDB URI and the same goes for the OPEN_AI env variable. You can get them by creating an account with MongoDB atlas and OpenAI. You can put whatever you like for the refresh and access token secret however the more secure they are the better. Lastly just get rid of the '.example' bit in the file name so the file is just called '.env'.
 
