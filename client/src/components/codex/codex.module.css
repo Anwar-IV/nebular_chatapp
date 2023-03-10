@@ -1,6 +1,6 @@
 .message {
   background: linear-gradient(var(--background-color), rgb(41, 43, 51));
-  width: 400px;
+  width: 40%;
   height: max-content;
   padding: 15px;
 }

@@ -32,7 +32,6 @@ export function MessageContextProvider({
 
   useEffect(() => {
     const socket = io("http://localhost:5500");
-    // const socket = io("https://nebular-api.herokuapp.com/");
     if (socket) {
       setSocket(socket);
       socket.emit("message-state", "initial messages");
