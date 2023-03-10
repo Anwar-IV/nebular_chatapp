@@ -10,7 +10,8 @@ export function Navbar() {
   const navigate = useNavigate();
   const signoutHandler = async () => {
     try {
-      const response = await fetch("http://localhost:5500/logout", {
+      // const response = await fetch("http://localhost:5500/logout", {
+      const response = await fetch("https://nebular-api.herokuapp.com/logout", {
         credentials: "include",
       });
       setUser(null);

@@ -73,10 +73,10 @@
 
 .error {
   font-size: 20px;
-  color: rgb(196, 195, 195);
+  color: rgb(183, 68, 68);
   margin: 0 auto;
   position: absolute;
-  top: 130px;
+  top: 100px;
 }
 
 .red {

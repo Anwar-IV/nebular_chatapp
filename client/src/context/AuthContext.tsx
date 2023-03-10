@@ -20,7 +20,8 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
   async function loginUser(username: string, password: string) {
     try {
       const payload = JSON.stringify({ username, password });
-      const response = await fetch("http://localhost:5500/login", {
+      // const response = await fetch("http://localhost:5500/login", {
+      const response = await fetch("https://nebular-api.herokuapp.com/login", {
         method: "POST",
         headers: { "content-type": "application/json" },
         credentials: "include",
@@ -46,12 +47,16 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
   async function registerUser(username: string, password: string) {
     try {
       const payload = JSON.stringify({ username, password });
-      const response = await fetch("http://localhost:5500/register", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-        body: payload,
-      });
+      // const response = await fetch("http://localhost:5500/register", {
+      const response = await fetch(
+        "https://nebular-api.herokuapp.com/register",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          credentials: "include",
+          body: payload,
+        }
+      );
       console.log({ response });
       if (response.status === 201) {
         const user: UserType = await response.json();
@@ -69,7 +74,7 @@ export function AuthContextProvider({ children }: AuthContextProviderType) {
       setRegisterError({ status: 504, error });
     }
   }
-  // getUser function only useful cookies when cookies are used.
+  // getUser function only useful when cookies are used.
 
   // async function getUser() {
   //   try {

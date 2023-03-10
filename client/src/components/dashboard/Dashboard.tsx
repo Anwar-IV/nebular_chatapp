@@ -40,11 +40,15 @@ export function Dashboard() {
         setCodexThinking(true);
         setCodexMessages((prev) => [...prev, { msg: "load" }]);
         const payload = JSON.stringify({ prompt: message });
-        const response = await fetch("http://localhost:5500/codex", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: payload,
-        });
+        // const response = await fetch("http://localhost:5500/codex", {
+        const response = await fetch(
+          "https://nebular-api.herokuapp.com/codex",
+          {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: payload,
+          }
+        );
         const data = await response.json();
         setCodexThinking(false);
         setCodexMessages((prev) => prev.filter((msg) => msg.msg !== "load"));
